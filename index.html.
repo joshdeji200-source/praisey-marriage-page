@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Praisey Marriage Page 💍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body {
   margin:0;
@@ -36,17 +35,6 @@ button {
 #maybe { background: lavender; color:black; }
 #no { background: red; color:white; }
 
-.heart {
-  position: fixed;
-  bottom: -50px;
-  animation: floatUp 4s linear forwards;
-  pointer-events:none;
-}
-@keyframes floatUp {
-  from { transform: translateY(0); opacity:1; }
-  to { transform: translateY(-120vh); opacity:0; }
-}
-
 .hidden { display:none; }
 
 #thumb {
@@ -63,34 +51,8 @@ button {
   transition: transform 0.3s ease;
 }
 
-.wiggle {
-  animation: wiggleAnim 0.5s infinite;
-}
-@keyframes wiggleAnim {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  50% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
-}
-
-#message { font-size:1.4em; margin-top:20px; }
-img { max-width:80%; margin-top:30px; border-radius:20px; }
-
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  top:0;
-  pointer-events:none;
-  animation: fall 3s linear forwards;
-}
-@keyframes fall {
-  to { transform: translateY(100vh) rotate(360deg); opacity:0; }
-}
 </style>
 </head>
-
 <body>
 
 <!-- PAGE 1 -->
@@ -105,21 +67,16 @@ img { max-width:80%; margin-top:30px; border-radius:20px; }
 
 <!-- PAGE 2 -->
 <div id="page2" class="hidden">
-  <h1>Place your stamp 🖤 on this button to accept</h1>
+  <h1>Place your thumbprint 🖤 on this button</h1>
   <button id="thumb">🤍 PRESS 🤍</button>
 </div>
 
 <!-- PAGE 3 -->
 <div id="page3" class="hidden">
   <h1>Congrats, Praisey! 💖</h1>
-  <p id="message">
-    You’re officially married to me (jokingly 😂).  
-    My ride-or-die, my home girl for life!
-  </p>
-  <h2 style="font-size:2em; margin-top:30px;">
-    MY PRAISEY FOR LIFE 💍💖
-  </h2>
-  <img src="final.png" alt="Fun Picture">
+  <p>You’re officially married to me (jokingly 😂). My ride-or-die, my home girl for life!</p>
+  <h2>MY PRAISEY FOR LIFE 💍💖</h2>
+  <img src="final.png" alt="Fun Picture" style="max-width:80%; border-radius:20px;">
 </div>
 
 <script>
@@ -143,55 +100,17 @@ noBtn.onclick = () => {
 // MAYBE disappears
 maybeBtn.onclick = () => maybeBtn.style.display = "none";
 
-// YES button
+// YES button goes to thumbprint page
 yesBtn.onclick = () => {
-  document.body.style.background = "linear-gradient(135deg,#ffb3d9,#9b59b6)";
-  spreadHearts();
-  confettiEffect();
   document.getElementById("page1").classList.add("hidden");
   document.getElementById("page2").classList.remove("hidden");
-  thumbBtn.classList.add("wiggle");
 };
 
-// Thumbprint button
+// Thumbprint button goes to final page
 thumbBtn.onclick = () => {
-  spreadHearts();
-  confettiEffect();
   document.getElementById("page2").classList.add("hidden");
   document.getElementById("page3").classList.remove("hidden");
-  thumbBtn.classList.remove("wiggle");
 };
-
-// Hearts floating
-function createHeart() {
-  const heart = document.createElement("div");
-  const hearts = ["💖","💗","💓","💞","💕","❤️","🩷","💍"];
-  heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
-  heart.className = "heart";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = Math.random()*30 + 20 + "px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),4000);
-}
-function spreadHearts(){
-  for(let i=0;i<200;i++){
-    setTimeout(createHeart,i*15);
-  }
-}
-
-// Confetti effect
-function confettiEffect(){
-  const colors=["#ff4d8d","#ffb3d9","#f5a623","#9b59b6","#00ff99"];
-  for(let i=0;i<150;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.background=colors[Math.floor(Math.random()*colors.length)];
-    c.style.left=Math.random()*100+"vw";
-    c.style.width = c.style.height = Math.random()*10 + 5 + "px";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
-}
 </script>
 </body>
 </html>
